@@ -1,0 +1,16 @@
+.ticker {
+    margin: auto;
+}
+
+.price {
+    font-size: 20px;
+    font-family: serif;
+    display: block;
+}
+
+.details {
+    font-size: 18px;
+    font-family: serif;
+    font-style: italic; 
+    color: #99b3ff;
+}

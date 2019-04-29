@@ -1,0 +1,42 @@
+.average::after {
+    content:'updates in every 30s';
+    display:block;
+    font-size: 10px;
+    text-align:right;
+    font-style:italic;
+}
+
+.average {
+    font-size:80px;
+    font-family: serif;
+}
+
+@media screen and (max-width:500px) {
+    .average {
+        font-size: 40px;
+    }
+
+    .average::after {
+        font-size: 7px;
+    }
+
+    .average::before {
+        content:'One Bitcoin';
+        display:block;
+        font-size: 18px;
+    }
+
+}
+
+@media screen and (max-width:320px) {
+
+        .average {
+                font-size: 30px;
+        }
+    
+    .average::before {
+                font-size: 14px;
+        }
+
+}
+
