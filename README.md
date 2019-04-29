@@ -2,3 +2,14 @@
 
 # Bitin
 Bitcoin ticker (INR) in Reactjs
+
+Live demo: [Bitin](https://bitin.netlify.com/)
+
+## Build & Run
+```
+git clone https://github.com/h4r0015k/Bitin.git
+cd Bitin
+npm install
+npm run build
+npm start
+```
