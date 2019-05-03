@@ -1,31 +1,22 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import "../css/Converter.css"
 
-class Converter extends Component {
+export default function Converter(props) {
 
+    const [value, setValue] = useState("1");
 
-    state = {
-        value : 1
-    }
-
-
-    handleChange = (event) => {
+    const handleChange = (event) => {
         const {value} = event.target;
-        this.setState({value});
+        setValue(value);
 
         // updates amount value in parent component;
-        this.props.amtFunc(value);
+        props.amtFunc(value);
     }
 
-    render() {
-        return (
-            <div className="inbox">
-                <input onChange={this.handleChange} name="amt" type="text" value={this.state.value}/>
-                <label id="label" for="amt"> Bitcoin</label>
-            </div>
-        );
-    }
-
+    return (
+        <div className="inbox">
+            <input onChange={handleChange} name="amt" type="text" value={value}/>
+            <label id="label" for="amt"> Bitcoin</label>
+        </div>
+    );
 }
-
-export default Converter;

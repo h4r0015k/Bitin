@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Exchanges from "./Exchanges"
 import Converter from "./component/Converter"
 import Ticker from "./component/Ticker"
@@ -6,48 +6,35 @@ import Average from "./component/Average"
 import Footer from "./component/Footer"
 import "./css/App.css"
 
-class App extends Component {
+export default function App() {
 
-    constructor() {
-        super();
-        
-        this.state = {
-            totalPrice : [],
-            amount : 1
-        }
+    const [price, setPrice] = useState({
+    
+        totalPrice : [],
+        amount : 1
 
-        this.exchanges = new Exchanges(); 
-        this.tickers = this.exchanges.data.map((current) => {
-            return <Ticker key = {current.id}
-                data = {current} 
-                getBack = {this.getPriceBack}
-                />
-        })
-    }
+    });
 
-    getPriceBack = data => {
-        this.setState(prevState => {
-            return {totalPrice : [...prevState.totalPrice, data]}
-        });
-    }
+    const getPriceBack = data => setPrice(prev => {return {...prev, totalPrice : [...prev.totalPrice, data]}});
+    const setAmount = amt => setPrice(prev => {return {...prev, amount:amt}});
+    
+    const exchanges = new Exchanges(); 
+    const tickers = exchanges.data.map((current) => {
+            return <Ticker 
+                    key = {current.id}
+                    data = {current} 
+                    getBack = {getPriceBack} />
+    }); 
 
-    setAmount = amt => {
-        this.setState({amount:amt});
-    }
-
-    render() {
-        return (
-            <div className="appBox">
-                <Converter amtFunc={this.setAmount} />
-                <Average prices={this.state.totalPrice} amount={this.state.amount}/>    
-                <div className="tickerBox">
-                    {this.tickers}
-                </div>
-                <Footer />
+    return (
+        <div className="appBox">
+            <Converter amtFunc={setAmount} />
+            <Average prices={price.totalPrice} amount={price.amount}/>    
+            <div className="tickerBox">
+                {tickers}
             </div>
-        );
-    }
-
+            <Footer />
+        </div>
+    );
+    
 }
-
-export default App;

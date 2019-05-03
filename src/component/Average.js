@@ -1,7 +1,7 @@
 import React from "react"
 import "../css/Average.css"
 
-function Average(props) {
+export default function Average(props) {
     
     function calAverage(arr) {
         let currencyFormatter = Intl.NumberFormat('en-US', {
@@ -10,6 +10,7 @@ function Average(props) {
         });
         
         let amount = Number.parseFloat(props.amount);
+
         return arr.length ? currencyFormatter.format((((arr.reduce((a, b) => a + b) / arr.length) * amount).toFixed(2))) : 0;
     }
 
@@ -20,4 +21,3 @@ function Average(props) {
     );
 }
 
-export default Average;
